@@ -267,13 +267,3 @@ Response (200):
    กด **ประวัติการเคลื่อนไหว** → ควรเห็นตารางรายการจอง/ปล่อย (ถ้ารัน migration ประวัติและมีข้อมูลแล้ว)  
 
 ถ้าทุกขั้นผ่าน แสดงว่าติดตั้งและรันระบบได้ถูกต้อง
-
-## สร้าง Production Build
-
-```bash
-# Backend
-cd backend && npm run build && npm start
-
-# Frontend
-cd frontend && npm run build && npm start
-```
