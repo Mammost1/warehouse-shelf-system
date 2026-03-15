@@ -1,0 +1,131 @@
+/* ========== Theme — โทนทันสมัย ไม่ใช่สี AI ธรรมดา ========== */
+:root {
+  /* โทนเข้ม — ดำอมเทา นุ่มตา */
+  --bg: #0c0c0f;
+  --surface: #16161a;
+  --border: #2a2a30;
+  --text: #f4f4f5;
+  --muted: #9ca3af;
+  /* จุดเด่น — เทียล/มรกต ไม่ใช่แดงหรือน้ำเงิน template */
+  --accent: #14b8a6;
+  --accent-soft: rgba(20, 184, 166, 0.15);
+  --accent-glow: rgba(20, 184, 166, 0.35);
+  /* สถานะ */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  /* หัวข้อ */
+  --heading: #f4f4f5;
+  --heading-muted: #9ca3af;
+}
+
+/* โทนสว่าง — สะอาด อุ่นเล็กน้อย ไม่ใช่ฟ้า generic */
+[data-theme="light"] {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --border: #e7e5e4;
+  --text: #1c1917;
+  --muted: #78716c;
+  --accent: #0d9488;
+  --accent-soft: rgba(13, 148, 136, 0.1);
+  --accent-glow: rgba(13, 148, 136, 0.25);
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --heading: #1c1917;
+  --heading-muted: #78716c;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  max-width: 100vw;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-dm-sans), 'Sarabun', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* พื้นหลังมีมิติ — ใช้ accent ของ theme */
+body {
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, var(--accent-soft), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 50%, rgba(255,255,255,0.02), transparent);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--text);
+}
+
+input, button, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* หน้าแรก — ปุ่มใช้ accent ของ theme */
+a.home-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--accent-glow);
+  text-decoration: none;
+}
+
+a.home-secondary-btn:hover {
+  border-color: var(--muted);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+/* ========== หัวข้อ — สไตล์รวมให้ทุกหน้า ========== */
+h1, h2, h3 {
+  color: var(--heading);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.pageTitle {
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--heading);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.sectionHeading {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--heading);
+}
