@@ -1,0 +1,28 @@
+{
+  "name": "warehouse-shelf-backend",
+  "version": "1.0.0",
+  "description": "Warehouse shelf reservation API",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "import-orders": "ts-node --transpile-only src/scripts/importOrdersFromExcel.ts",
+    "migrate:orders-name-quantity": "ts-node --transpile-only src/scripts/runMigrationOrdersNameQuantity.ts",
+    "update-product-names": "ts-node --transpile-only src/scripts/updateProductNamesFromExcel.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}
