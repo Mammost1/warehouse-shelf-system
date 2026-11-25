@@ -1,5 +1,35 @@
 # Warehouse Shelf Reservation System
 
+Take-home assignment: reserve warehouse shelf space (Shelf / Level / Slot) for orders, with a REST API and a
+monitor page to look up an Order ID or Slot ID. The detailed documentation below is in Thai.
+
+**What it does**
+
+- Assigns each order a slot by rules from the assignment (levels 1 to 7, shelves A to Z, slots 1 to 50;
+  several orders can share a slot while their total height fits; shoes go to shelves A-B or C-D by box height).
+- Dashboard with charts, a monitor with search, an "add to warehouse" form and a movement history.
+- Imports a 10,000-order Excel dataset (`database/ORDERS-10000-DATASET.xlsx`).
+
+**Stack:** Node.js, Express, TypeScript, MySQL 8 (backend); Next.js 14, React, Recharts (frontend).
+
+**Quick start** (Node.js 18+, MySQL 8+)
+
+```bash
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS warehouse_shelf;"
+mysql -u root -p warehouse_shelf < database/schema.sql
+mysql -u root -p warehouse_shelf < database/seed.sql
+cd backend && cp .env.example .env   # set DB_PASSWORD, then:
+npm install && npm run dev            # API on http://localhost:4000
+cd ../frontend && npm install && npm run dev   # UI on http://localhost:3000
+```
+
+`npm run build` passes in both `backend/` and `frontend/`. The API has not been exercised against a live
+MySQL in the last review, so treat the SQL migrations as untested there.
+
+---
+
+## เอกสารภาษาไทย
+
 ระบบจองชั้นวางสินค้าในคลัง (Shelf / Level / Slot) พร้อม API และหน้า Monitor สำหรับค้นหา Order ID / Slot ID
 
 ---
@@ -39,8 +69,7 @@ warehouse-shelf-system/
 ├── scripts/
 │   └── setup-database.bat  # สคริปต์ตั้งค่า DB (Windows)
 ├── README.md
-├── วิธีติดตั้ง.md
-└── ข้อกำหนด-PDF-เช็คลิสต์.md
+└── วิธีติดตั้ง.md
 ```
 
 ## ความต้องการของระบบ
