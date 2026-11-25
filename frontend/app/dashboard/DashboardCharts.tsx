@@ -41,7 +41,7 @@ export function StatusPieChart({ data }: { data: PieItem[] }) {
   if (data.length === 0) return null;
   return (
     <ResponsiveContainer width="100%" height={280}>
-      <PieChart isAnimationActive={false}>
+      <PieChart>
         <Pie
           data={data}
           dataKey="value"
@@ -62,12 +62,12 @@ export function StatusPieChart({ data }: { data: PieItem[] }) {
           ))}
         </Pie>
         <Tooltip
-          formatter={(value: number) => [value, 'shelf']}
+          formatter={(value) => [Number(value), 'shelf']}
           contentStyle={tooltipStyle}
           itemStyle={{ color: 'var(--text)' }}
           isAnimationActive={false}
         />
-        <Legend wrapperStyle={{ fontSize: 12 }} formatter={(value) => <span style={{ color: 'var(--text)' }}>{value}</span>} isAnimationActive={false} />
+        <Legend wrapperStyle={{ fontSize: 12 }} formatter={(value) => <span style={{ color: 'var(--text)' }}>{value}</span>} />
       </PieChart>
     </ResponsiveContainer>
   );
@@ -77,12 +77,12 @@ export function CategoryBarChart({ data }: { data: BarItem[] }) {
   if (data.length === 0) return null;
   return (
     <ResponsiveContainer width="100%" height={260}>
-      <BarChart data={data} layout="vertical" margin={{ top: 8, right: 20, left: 8, bottom: 8 }} isAnimationActive={false}>
+      <BarChart data={data} layout="vertical" margin={{ top: 8, right: 20, left: 8, bottom: 8 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.6} />
         <XAxis type="number" tick={tickStyle} />
         <YAxis type="category" dataKey="name" width={88} tick={tickStyle} />
         <Tooltip
-          formatter={(value: number) => [value, 'shelf']}
+          formatter={(value) => [Number(value), 'shelf']}
           contentStyle={tooltipStyle}
           itemStyle={{ color: 'var(--text)' }}
           cursor={{ fill: 'var(--border)', opacity: 0.3 }}
@@ -123,7 +123,7 @@ export function SlotsPieChart({ occupied, total }: { occupied: number; total: nu
   if (data.length === 0) return null;
   return (
     <ResponsiveContainer width="100%" height={260}>
-      <PieChart isAnimationActive={false}>
+      <PieChart>
         <Pie
           data={data}
           dataKey="value"
@@ -144,12 +144,12 @@ export function SlotsPieChart({ occupied, total }: { occupied: number; total: nu
           ))}
         </Pie>
         <Tooltip
-          formatter={(value: number) => [value.toLocaleString('th-TH'), 'ช่อง']}
+          formatter={(value) => [Number(value).toLocaleString('th-TH'), 'ช่อง']}
           contentStyle={tooltipStyle}
           itemStyle={{ color: 'var(--text)' }}
           isAnimationActive={false}
         />
-        <Legend wrapperStyle={{ fontSize: 12 }} formatter={(v) => <span style={{ color: 'var(--text)' }}>{v}</span>} isAnimationActive={false} />
+        <Legend wrapperStyle={{ fontSize: 12 }} formatter={(v) => <span style={{ color: 'var(--text)' }}>{v}</span>} />
       </PieChart>
     </ResponsiveContainer>
   );
@@ -162,13 +162,13 @@ export function UtilizationBarChart({ data }: { data: UtilizationItem[] }) {
   if (data.length === 0) return null;
   return (
     <ResponsiveContainer width="100%" height={260}>
-      <BarChart data={data} layout="vertical" margin={{ top: 8, right: 20, left: 8, bottom: 8 }} isAnimationActive={false}>
+      <BarChart data={data} layout="vertical" margin={{ top: 8, right: 20, left: 8, bottom: 8 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.6} />
         <XAxis type="number" domain={[0, 100]} tick={{ ...tickStyle }} tickFormatter={(v) => `${v}%`} />
         <YAxis type="category" dataKey="name" width={88} tick={tickStyle} />
         <Tooltip
-          formatter={(value: number, _n, props: { payload: UtilizationItem }) => [
-            `${value.toFixed(1)}% (${props.payload.occupied.toLocaleString('th-TH')} / ${props.payload.total.toLocaleString('th-TH')} ช่อง)`,
+          formatter={(value, _n, item) => [
+            `${Number(value).toFixed(1)}% (${(item.payload as UtilizationItem).occupied.toLocaleString('th-TH')} / ${(item.payload as UtilizationItem).total.toLocaleString('th-TH')} ช่อง)`,
             'การใช้',
           ]}
           contentStyle={tooltipStyle}

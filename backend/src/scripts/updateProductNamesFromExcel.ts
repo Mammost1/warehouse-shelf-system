@@ -5,6 +5,7 @@
  */
 require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
 
+import type { ResultSetHeader } from 'mysql2';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as X from 'xlsx';
@@ -76,8 +77,8 @@ async function main() {
       continue;
     }
     try {
-      const [result] = await pool.query<{ affectedRows?: number }>('UPDATE orders SET product_name = ? WHERE id = ?', [productName, orderId]);
-      if ((result as any)?.affectedRows > 0) updated++;
+      const [result] = await pool.query<ResultSetHeader>('UPDATE orders SET product_name = ? WHERE id = ?', [productName, orderId]);
+      if (result.affectedRows > 0) updated++;
     } catch (e) {
       if (updated + skipped <= 3) console.error('แถว', i + 2, orderId, e);
     }

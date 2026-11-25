@@ -1,3 +1,4 @@
+import type { RowDataPacket } from 'mysql2';
 import pool from '../config/database';
 import type { ReserveSlotBody, OrderLocationResponse, SlotContentsResponse } from '../types';
 
@@ -5,7 +6,7 @@ export async function reserveSlot(body: ReserveSlotBody): Promise<{ slotId: numb
   const { orderId, category, heightCm, productName, quantity } = body;
   const orderHeight = heightCm != null ? Number(heightCm) : 0;
 
-  const [existingOrder] = await pool.query<{ id: string }[]>(
+  const [existingOrder] = await pool.query<(RowDataPacket & { id: string })[]>(
     'SELECT id FROM orders WHERE id = ?',
     [orderId]
   );
@@ -31,7 +32,7 @@ export async function reserveSlot(body: ReserveSlotBody): Promise<{ slotId: numb
     }
   }
 
-  const [existingRes] = await pool.query<{ slot_id: number }[]>(
+  const [existingRes] = await pool.query<(RowDataPacket & { slot_id: number })[]>(
     'SELECT slot_id FROM reservations WHERE order_id = ?',
     [orderId]
   );
